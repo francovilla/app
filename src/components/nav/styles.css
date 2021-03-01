@@ -1,0 +1,41 @@
+.navbar-c{
+    background-color: #121635;
+    
+}
+
+.title{
+    color: white;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+}
+
+.point{
+    color: blue;
+    font-size: 40px;
+    height: 1px;
+    width: 1px;
+}
+
+.container{
+    margin: 0;
+    width: 6000px;
+}
+
+.address{
+    color: white;
+}
+
+.identicon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: inset rgba(255, 255, 255, 0.6) 0 2px 2px, inset rgba(0, 0, 0, 0.3) 0 -2px 6px;
+    transition: border-radius 2.5s;
+    transition-delay: 3s;
+    vertical-align: middle;
+    margin-right: 4px;
+  }

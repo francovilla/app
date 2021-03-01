@@ -1,0 +1,123 @@
+.farm{
+    background-color: #121635;
+    width: 250px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.farmlogo{
+    width: 100px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.minilogo{
+    width: 20px;
+    vertical-align: middle;
+}
+
+.numbers{
+    color: rgb(0, 110, 255);
+}
+
+
+.selector{
+    color: white;
+}
+.stake-b{
+    background-color:rgb(0, 110, 255);
+    color: white;
+    width: 100%;
+    font-size: 15px;
+    padding: 2.5px;
+    margin-bottom: 5px;
+}
+
+.harvest-b{
+   border-color:rgb(0, 110, 255);
+   border-width: 3px;
+    color: white;
+    width: 100%;
+    font-size: 9px;
+    padding: 2.5px;
+    margin-bottom: 5px;
+}
+
+.harvest-br{
+    border-color:rgb(255, 60, 0);
+    border-width: 3px;
+     color: white;
+     width: 100%;
+     font-size: 9px;
+     padding: 2.5px;
+     margin-bottom: 5px;
+ }
+
+.stake-s{
+    background-color:rgb(0, 110, 255);
+    color: white;
+    width: 100%;
+    font-size: 13px;
+    padding: 1px;
+    margin-top: 5px;
+}
+
+.stake-bs{
+    background-color: #5cb85c;
+    color: white;
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.max,.max:hover {
+    color: rgb(255, 238, 0);
+    padding: 1px;
+    border: 0;
+    font-size: 12px;
+}
+
+
+
+.stake-br{
+    background-color: #ce5626;
+    color: white;
+    width: 100%;
+    font-size: 20px;
+    padding: 5px;
+
+}
+
+.wow{
+    color: red;
+}
+
+.modal-content{
+    background-color:  #090d28;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+input{
+    background-color: #121635;
+    border: 0;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

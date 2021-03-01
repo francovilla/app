@@ -1,0 +1,28 @@
+body{
+    background-color: #090d28;
+}
+
+p,h1,h2,h3,h4,h5 {
+    color: white;
+    margin: 0;
+}
+.btn:hover{
+    color: white !important;
+}
+
+.selector{
+    border-width: 0px 0px 3px;
+    border-style: solid;
+    border-color: rgb(0, 47, 255);
+    margin-bottom: 15px;
+}
+
+.selector-blue{
+    color: white;
+    border-width: 0px 0px 3px;
+    border-style: solid;
+    border-color: rgb(255, 60, 0);
+    margin-bottom: 15px;
+}
+
+
