@@ -79,7 +79,7 @@ render(){
     return <div>
     <Nav address={this.state.address}/> 
     <h1 style={{marginBottom: 25, color:'transparent'}}>Test</h1>
-    {/*Render farms from farms.jsonc */}
+    {/*Render farms from farms.json */}
   
     <div className="row d-flex justify-content-center">
     {TokenList.data.map((farm) => {
