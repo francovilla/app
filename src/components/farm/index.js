@@ -148,13 +148,20 @@ class Farm extends Component {
         <input onChange={this.handleChange} id="inputModal" type='number' className='from-control'></input>
     </div>
     <div className='row'>
-        <div className="col-12">
+        <div className="col-6">
         <button  
         onClick={this.state.tokenApproved >= this.state.inputValue * (10 ** this.state.tokenDecimals)? this.deposit : this.approve} 
         className="btn stake-b" type="button" disabled={this.state.loading}>
         {this.state.loading ? this.loadingButton('Confirm please...') : 
          this.state.tokenApproved >= this.state.inputValue * (10 ** this.state.tokenDecimals)? this.button('Deposit LP') :
          this.button('Approve LP Frist')  } 
+        </button>
+        </div>
+
+        <div className="col-6">
+        <button  
+        onClick={()=>{this.setState({modal:false})}} 
+        className="btn back-b" type="button" > Back
         </button>
         </div>
     </div>
@@ -169,10 +176,16 @@ class Farm extends Component {
         <input onChange={this.handleChange} id="inputModal" type='number' className='from-control'></input>
     </div>
     <div className='row'>
-        <div className="col-12">
+        <div className="col-6">
         <button  onClick={this.whitdraw} className="btn stake-b" type="button" disabled={this.state.loading}>
             {this.state.loading ? this.loadingButton('Confirm please...') : this.button('Whitdraw LP') } 
             </button>
+        </div>
+        <div className="col-6">
+        <button  
+        onClick={()=>{this.setState({modal:false})}} 
+        className="btn back-b" type="button" > Back
+        </button>
         </div>
     </div>
 
