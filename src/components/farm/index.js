@@ -15,6 +15,7 @@ class Farm extends Component {
             lp: '',
             tokenBalance: 0,
             tokenDecimals: 0,
+            tokenApproved: 0,
             modal: false,
             inputValue: '',
             loading: false,
@@ -25,6 +26,7 @@ class Farm extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.deposit = this.deposit.bind(this)
         this.harvest = this.harvest.bind(this)
+        this.approve = this.approve.bind(this)
 
     }   
     
@@ -41,15 +43,18 @@ class Farm extends Component {
             const token = window.tokens[tokenId]
             const farm = window.farm
             let tokenBalance = await token.methods.balanceOf(this.props.address).call()
+            let tokenApproved = await token.methods.allowance(this.props.address , '0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24').call()
             const tokenDecimals = await token.methods.decimals().call()
             const lpStaked = await farm.methods.deposited(tokenId , this.props.address).call()
             const pending = await farm.methods.pending(tokenId , this.props.address).call()
+            console.log(tokenApproved)
         
             this.setState({
                 pending,
                 lpStaked,
                 tokenBalance,
-                tokenDecimals
+                tokenDecimals,
+                tokenApproved
             })  
         } catch (error) {
             console.log(`Error fund: ${error}`)
@@ -66,6 +71,7 @@ class Farm extends Component {
 
     handleChange(e){
         this.setState({inputValue: e.target.value})
+        console.log(e.target.value * (10 ** this.state.tokenDecimals))
     }
 
     async deposit(){
@@ -83,6 +89,21 @@ class Farm extends Component {
                 console.log(error)
             }
         }  
+    }
+
+    async approve(){
+        var value = this.state.inputValue * (10 ** this.state.tokenDecimals) * 5
+        const tokenId = this.props.farm.id
+        const token = window.tokens[tokenId]
+            try {
+                this.setState({loading: true})
+                await token.methods.approve('0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24' , window.web3.utils.toBN(`${value}`))
+            .send({from: this.props.address})
+                this.setState({loading: false})    
+            } catch (error) {
+                this.setState({loading: false}) 
+                console.log(error)
+            }
     }
     loadingButton(text){
         return <div>
@@ -104,9 +125,13 @@ class Farm extends Component {
     </div>
     <div className='row'>
         <div className="col-12">
-        <button  onClick={this.deposit} className="btn stake-b" type="button" disabled={this.state.loading}>
-            {this.state.loading ? this.loadingButton('Confirm please...') : this.button('Deposit LP') } 
-            </button>
+        <button  
+        onClick={this.state.tokenApproved >= this.state.inputValue * (10 ** this.state.tokenDecimals)? this.deposit : this.approve} 
+        className="btn stake-b" type="button" disabled={this.state.loading}>
+        {this.state.loading ? this.loadingButton('Confirm please...') : 
+         this.state.tokenApproved >= this.state.inputValue * (10 ** this.state.tokenDecimals)? this.button('Deposit LP') :
+         this.button('Approve LP Frist')  } 
+        </button>
         </div>
     </div>
 
