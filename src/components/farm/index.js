@@ -17,6 +17,7 @@ class Farm extends Component {
             tokenDecimals: 0,
             tokenApproved: 0,
             modal: false,
+            modalw: false,
             inputValue: '',
             loading: false,
             selector: true
@@ -25,6 +26,7 @@ class Farm extends Component {
         this.maxButton = this.maxButton.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.deposit = this.deposit.bind(this)
+        this.whitdraw = this.whitdraw.bind(this)
         this.harvest = this.harvest.bind(this)
         this.approve = this.approve.bind(this)
 
@@ -32,7 +34,6 @@ class Farm extends Component {
     
 
    async componentDidMount(){
-    console.log('update')
     setInterval(async() => {
         this.updatePool()
     }, 2000);}
@@ -47,7 +48,6 @@ class Farm extends Component {
             const tokenDecimals = await token.methods.decimals().call()
             const lpStaked = await farm.methods.deposited(tokenId , this.props.address).call()
             const pending = await farm.methods.pending(tokenId , this.props.address).call()
-            console.log(tokenApproved)
         
             this.setState({
                 pending,
@@ -62,16 +62,23 @@ class Farm extends Component {
         
     }
 
-    maxButton(){
-        let value = (this.state.tokenBalance / (10 ** this.state.tokenDecimals))
-        document.getElementById('inputModal')
-        .value = value.toFixed(4)
-        this.setState({inputValue: value})
+    maxButton(type){
+        if(type != 'staked'){
+            let value = (this.state.tokenBalance / (10 ** this.state.tokenDecimals))
+            document.getElementById('inputModal')
+            .value = value.toFixed(4)
+            this.setState({inputValue: value})
+        } else {
+            let value = (this.state.lpStaked / (10 ** this.state.tokenDecimals))
+            document.getElementById('inputModal')
+            .value = value.toFixed(4)
+            this.setState({inputValue: value})
+        }
+        
     }
 
     handleChange(e){
         this.setState({inputValue: e.target.value})
-        console.log(e.target.value * (10 ** this.state.tokenDecimals))
     }
 
     async deposit(){
@@ -104,6 +111,23 @@ class Farm extends Component {
                 this.setState({loading: false}) 
                 console.log(error)
             }
+    }
+
+    async whitdraw(){
+        var value = this.state.inputValue * (10 ** this.state.tokenDecimals)
+        if(this.state.inputValue > 0){
+            const tokenId = this.props.farm.id
+            const farm = window.farm
+            try {
+                this.setState({loading: true})
+                await farm.methods.withdraw(tokenId , window.web3.utils.toBN(`${value}`))
+            .send({from: this.props.address})
+                this.setState({loading: false})    
+            } catch (error) {
+                this.setState({loading: false}) 
+                console.log(error)
+            }
+        }  
     }
     loadingButton(text){
         return <div>
@@ -140,13 +164,13 @@ class Farm extends Component {
 
     whitdrawDiv(){
         return <div className="col-12">
-        <p style={{marginBottom:4}}>Staked: {(this.state.tokenBalance / (10 ** this.state.tokenDecimals)).toFixed(2)} LP    <button onClick={this.maxButton} className="btn  max">MAX</button></p>
+        <p style={{marginBottom:4}}>Staked: {(this.state.lpStaked / (10 ** this.state.tokenDecimals)).toFixed(2)} LP    <button onClick={()=>{this.maxButton('staked')}} className="btn  max">MAX</button></p>
     <div className="input-group mb-3 d-flex justify-content-center">
         <input onChange={this.handleChange} id="inputModal" type='number' className='from-control'></input>
     </div>
     <div className='row'>
         <div className="col-12">
-        <button  onClick={this.deposit} className="btn stake-b" type="button" disabled={this.state.loading}>
+        <button  onClick={this.whitdraw} className="btn stake-b" type="button" disabled={this.state.loading}>
             {this.state.loading ? this.loadingButton('Confirm please...') : this.button('Whitdraw LP') } 
             </button>
         </div>
@@ -178,7 +202,7 @@ class Farm extends Component {
         </div>
         <div className="col-6 ">
             <button onClick={()=>{this.setState({modal:!this.state.modal})}}  className="btn harvest-b ">Stake LP</button>
-            <button  className="btn harvest-br ">Whitdraw</button>
+            <button onClick={()=>{this.setState({modalw:!this.state.modalw})}}  className="btn harvest-br ">Whitdraw</button>
         </div>
     </div>
         </div> 
@@ -216,7 +240,12 @@ render(){
         <div className="row">
         {this.depositDiv()}
         </div>
-       
+        </Modal>
+
+        <Modal size="sm" show={this.state.modalw}>
+        <div className="row">
+        {this.whitdrawDiv()}
+        </div>
         </Modal>
          
 
