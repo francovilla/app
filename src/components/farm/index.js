@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import './style.css'
 import {Modal , Button , Container , Row,Col} from 'react-bootstrap'
+import chart from 'chart.js'
 
 
 
@@ -48,7 +49,7 @@ class Farm extends Component {
             const tokenDecimals = await token.methods.decimals().call()
             const lpStaked = await farm.methods.deposited(tokenId , this.props.address).call()
             const pending = await farm.methods.pending(tokenId , this.props.address).call()
-        
+
             this.setState({
                 pending,
                 lpStaked,
@@ -64,7 +65,7 @@ class Farm extends Component {
 
     maxButton(type){
         if(type != 'staked'){
-            let value = (this.state.tokenBalance / (10 ** this.state.tokenDecimals))
+            let value = this.state.tokenBalance / (10 ** this.state.tokenDecimals)
             document.getElementById('inputModal')
             .value = value.toFixed(4)
             this.setState({inputValue: value})
@@ -83,6 +84,7 @@ class Farm extends Component {
 
     async deposit(){
         var value = this.state.inputValue * (10 ** this.state.tokenDecimals)
+        console.log(value)
         if(this.state.inputValue > 0){
             const tokenId = this.props.farm.id
             const farm = window.farm
@@ -114,7 +116,8 @@ class Farm extends Component {
     }
 
     async whitdraw(){
-        var value = this.state.inputValue * (10 ** this.state.tokenDecimals)
+        var value = this.state.inputValue * (10 ** this.state.tokenDecimals) - 100000000000000
+        console.log(value)
         if(this.state.inputValue > 0){
             const tokenId = this.props.farm.id
             const farm = window.farm
@@ -183,7 +186,7 @@ class Farm extends Component {
         </div>
         <div className="col-6">
         <button  
-        onClick={()=>{this.setState({modal:false})}} 
+        onClick={()=>{this.setState({modalw:false})}} 
         className="btn back-b" type="button" > Back
         </button>
         </div>
@@ -237,7 +240,7 @@ render(){
             <div className="col-12 d-flex justify-content-center"><h4> {this.props.farm.name}</h4></div>
             <div style={{marginBottom: 7, fontSize: 10}} className="col-12 text-center"><p>Deposit {this.props.farm.name} LP Earn HAW</p></div>
             
-       {this.state.lpStaked > 0? this.active(): this.stakeButton()}
+       {this.state.lpStaked > 100000000000000? this.active(): this.stakeButton()}
         
         </div>
         <div className="col-12 row ">

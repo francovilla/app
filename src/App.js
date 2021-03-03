@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import Nav from './components/nav'
 import Farm from './components/farm';
+import Statics from './components/statics'
 import './style.css'
 import TokenList from './components/farm/TokenList.json'
 import Web3 from 'web3'
@@ -15,7 +16,7 @@ class App extends Component {
         this.state ={
             address: '0x0000',
             login: false,
-            farm: ''
+            farm: '',
         }
     }
 
@@ -88,7 +89,8 @@ render(){
         </div>   
     })}
     </div>
-    
+   <Statics/>
+   <Statics/>
      
     </div>
   }
