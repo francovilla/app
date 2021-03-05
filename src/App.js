@@ -5,7 +5,7 @@ import Statics from './components/statics'
 import './style.css'
 import TokenList from './components/farm/TokenList.json'
 import Web3 from 'web3'
-import FarmAbi from './contracts/Farm.json'
+import FarmAbi from './contracts/MasterChef.json'
 import TokenAbi from  './components/farm/TokenAbi.json'
 
 
