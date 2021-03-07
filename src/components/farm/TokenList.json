@@ -2,19 +2,11 @@
     "data":[
         {
             "id": 0,
-            "img": "images/bnbhaw.png",
-            "name": "HAW - BNB",
+            "img": "/images/bnbhaw.png",
+            "name": "AAA - BNB",
             "earn": "HAW",
-            "lpAddress": "0x19B6eC4A43F861F96d41b23ca0cc2769DB55EBdF",
+            "lpAddress": "0x4CDea9C6cf2BACcb41325c5B6c829a49aC08E91A",
             "Apy": 400
-        },
-        {
-            "id": 1,
-            "img": "images/busdhaw.png",
-            "name": "HAW - BUSD",
-            "earn": "HAW",
-            "lpAddress": "0x21E1D6ead932e1919992DfcE51c474062A96F71A",
-            "Apy": 567
         }
     ]
     

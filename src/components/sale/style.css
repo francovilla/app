@@ -1,0 +1,49 @@
+.sale{
+    background-color: #121635;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    min-width: 260px;
+    max-width: 300px;
+    
+}
+
+
+.probar{
+    background-color: #090d28;
+}
+.bnblogo{
+    width: 25px;
+    vertical-align: middle;
+}
+.inputic{
+    width: 30px;
+    background-color: #090d28;
+    padding: 5px;
+}
+.from-control{
+    background-color: #090d28;
+    font-size: 18px;
+    max-width: 100px;
+}
+
+.list-group-item{
+    background-color: transparent;
+    color: white;
+}
+.copy{
+    background-color:rgb(0, 110, 255);
+    color: white;
+    width: 100%;
+    font-size: 20px;
+    padding: 1px;
+    margin-top: 5px;
+}
+.btn-buy{
+    background-color:rgb(0, 110, 255);
+    color: white;
+    width: 50%;
+    font-size: 13px;
+    padding: 1px;
+    margin-top: 5px;
+}

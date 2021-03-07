@@ -35,20 +35,22 @@ class Farm extends Component {
     
 
    async componentDidMount(){
+  
     setInterval(async() => {
         this.updatePool()
     }, 2000);}
 
     async updatePool(){
         try {
-            const tokenId = this.props.farm.id
+            const tokenId = this.props.farm.id 
             const token = window.tokens[tokenId]
             const farm = window.farm
+
             let tokenBalance = await token.methods.balanceOf(this.props.address).call()
             let tokenApproved = await token.methods.allowance(this.props.address , '0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24').call()
             const tokenDecimals = await token.methods.decimals().call()
-            const lpStaked = await farm.methods.deposited(tokenId , this.props.address).call()
-            const pending = await farm.methods.pending(tokenId , this.props.address).call()
+            const lpStaked = await farm.methods.deposited(tokenId  , this.props.address).call()
+            const pending = await farm.methods.pendingHawk(tokenId  , this.props.address).call()
 
             this.setState({
                 pending,
@@ -236,7 +238,7 @@ class Farm extends Component {
 render(){
     return <div className="row farm d-flex justify-content-center ">
         <div style={{marginBottom:10}} className="col-12 row ">
-            <div className="col-12 d-flex justify-content-center "> <img className="farmlogo" alt="" src={window.location.href + this.props.farm.img}></img></div>
+            <div className="col-12 d-flex justify-content-center "> <img className="farmlogo" alt="" src={window.location.origin + this.props.farm.img}></img></div>
             <div className="col-12 d-flex justify-content-center"><h4> {this.props.farm.name}</h4></div>
             <div style={{marginBottom: 7, fontSize: 10}} className="col-12 text-center"><p>Deposit {this.props.farm.name} LP Earn HAW</p></div>
             

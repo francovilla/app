@@ -1,12 +1,14 @@
 import React, { Component }  from 'react';
 import Nav from './components/nav'
 import Farm from './components/farm';
+import Sale from './components/sale'
 import Statics from './components/statics'
 import './style.css'
 import TokenList from './components/farm/TokenList.json'
 import Web3 from 'web3'
 import FarmAbi from './contracts/MasterChef.json'
-import TokenAbi from  './components/farm/TokenAbi.json'
+import TokenAbi from  './contracts/HawkToken.json'
+import {BrowserRouter as Router ,Switch , Route} from 'react-router-dom'
 
 
 
@@ -61,7 +63,7 @@ class App extends Component {
         window.tokens = []
         for (let i = 0; i < tokenList.length; i++) {
             const TokenAddress = tokenList[i].lpAddress
-            window.tokens.push(new web3.eth.Contract(TokenAbi, TokenAddress))
+            window.tokens.push(new web3.eth.Contract(TokenAbi.abi, TokenAddress))
         }
 
         this.forceUpdate() //Update the Web after load all 
@@ -81,16 +83,27 @@ render(){
     <Nav address={this.state.address}/> 
     <h1 style={{marginBottom: 25, color:'transparent'}}>Test</h1>
     {/*Render farms from farms.json */}
-  
-    <div className="row d-flex justify-content-center">
-    {TokenList.data.map((farm) => {
-       return <div key={farm.id} className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center h-100">
-        <Farm apy={farm.apy} login={this.state.login} address={this.state.address}  farm={farm}/>
-        </div>   
-    })}
-    </div>
-   <Statics/>
-   <Statics/>
+   
+            
+
+            <Router>
+                <Switch>
+                    <Route path="/farms">
+                    <div className="row d-flex justify-content-center">
+                    {TokenList.data.map((farm) => {
+                    return <div key={farm.id} className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center h-100">
+                        <Farm apy={farm.apy} login={this.state.login} address={this.state.address}  farm={farm}/>
+                        </div>   
+                    })}
+                    </div>
+                    </Route>
+                    <Route path="/sale">
+                        <Sale/>
+                    </Route>
+                </Switch>
+            </Router>
+        
+
      
     </div>
   }
