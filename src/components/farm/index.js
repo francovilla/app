@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import './style.css'
-import {Modal , Button , Container , Row,Col} from 'react-bootstrap'
+import {Modal} from 'react-bootstrap'
 import chart from 'chart.js'
 
 
