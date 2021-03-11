@@ -49,7 +49,7 @@ class Farm extends Component {
             let tokenBalance = await token.methods.balanceOf(this.props.address).call()
             let tokenApproved = await token.methods.allowance(this.props.address , '0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24').call()
             const tokenDecimals = await token.methods.decimals().call()
-            const lpStaked = await farm.methods.deposited(tokenId  , this.props.address).call()
+            const lpStaked = await farm.methods.deposited(tokenId).call()
             const pending = await farm.methods.pendingHawk(tokenId  , this.props.address).call()
 
             this.setState({

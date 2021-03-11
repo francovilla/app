@@ -98,7 +98,10 @@ render(){
                     </div>
                     </Route>
                     <Route path="/sale">
-                        <Sale/>
+                        <Sale address={this.state.address}/>
+                    </Route>
+                    <Route path="/">
+                        <Sale address={this.state.address}/>
                     </Route>
                 </Switch>
             </Router>
