@@ -2,12 +2,13 @@ import React, { Component }  from 'react';
 import {Navbar ,  } from 'react-bootstrap'
 import './styles.css'
 import blockies from '../../blockies/blockies';
+import hold from '../../imgs/hold.png'
 
 class NavS extends Component{
 
     render(){
         return <Navbar className="navbar-c" expand="lg" fixed="top">
-        <Navbar.Brand  href="#"><h3 className="title">HAWK<i style={{color:'rgb(255, 174, 0'}} className="fas fa-feather-alt"></i>finance</h3></Navbar.Brand>
+        <Navbar.Brand  href="#"><h3 className="title">HAWK<i style={{color:'rgb(82,91,255)'}} className="fas fa-feather-alt"></i>finance</h3></Navbar.Brand>
         <Navbar.Text className="text-right" style={{
                 color: 'white',
                 verticalAlign: 'middle',
