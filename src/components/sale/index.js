@@ -59,12 +59,11 @@ class Sale extends Component{
         try {
             const web3 = window.web3
             const networkID = await web3.eth.net.getId()
-            const saleData = SaleIf.networks[networkID]
-            if(saleData){
-                const sale =  new web3.eth.Contract(SaleIf.abi, saleData.address)
+      
+                const sale =  new web3.eth.Contract(SaleIf.abi, '0x17E25Eaa88c94FFFa088B1AbAAfD0359D64715CE')
                 window.sale = sale
-                console.log(`Sale loaded: ${saleData.address}`)
-            }   
+                console.log(`Sale loaded: 0x17E25Eaa88c94FFFa088B1AbAAfD0359D64715CE`)
+
             this.loadData()
         } catch (error) {
             console.log(error)
@@ -86,7 +85,7 @@ class Sale extends Component{
            //Load all the past buyers
            try {
             await window.sale.getPastEvents('TokensPurchased',{
-                fromBlock:0,
+                fromBlock:this.state.currentBlock - 4500,
                 toBlock: 'latest'
             }, (error, events)=>{
             this.setState({purchases: events.reverse()})
@@ -145,19 +144,7 @@ class Sale extends Component{
  
     render(){
         return <div className="d-flex row justify-content-center">
-            <div  className="sale h-100">
-                <h4><img style={{width:40}} src={window.location.origin + '/images/haw.png'}></img> Hawk Token</h4>
-            <div style={{marginTop:4, marginBottom: 10}}>
-                <div className='d-flex justify-content-center'>
-                    <p><font style={{color: 'rgb(0, 110, 255)'}}>{this.state.bnbRaised.toFixed(1)}</font> / <font style={{fontSize: 12.6}}>{this.state.maxAmount} BNB</font> </p>
-                </div>
-                <ProgressBar striped animated label={this.state.bnbRaised / this.state.maxAmount * 100 + '% complete'} className="probar" now={this.state.bnbRaised / this.state.maxAmount * 100} /> 
-            </div>
-            <p style={{fontSize:17}}><i className="fas fa-flag-checkered"></i> Price: 0.001 <font style={{color: 'rgb(253, 238, 21)'}}>BNB</font>/HAW</p>
-            <p style={{fontSize:13}}><i className="fas fa-exchange-alt"></i> Max buy amount: 10 <font style={{color: 'rgb(253, 238, 21)'}}>BNB</font></p>
-            <p style={{fontSize:13}}><i className="fas fa-layer-group"></i> Your Bnb Spend: {this.state.userBuyed.toFixed(1)} <font style={{color: 'rgb(0, 110, 255)'}}>BNB</font></p>
-            <button onClick={()=>{this.setState({modal:!this.state.modal})}} className="btn copy">Spend BNB</button>
-            </div>
+            
 
             <div  className="sale-farm h-100">
             <div className=" ">
@@ -174,10 +161,23 @@ class Sale extends Component{
                 </div>
                 <div style={{marginTop:8}} className="col-12 text-center">
                     <p><i className="fas fa-map-marked"></i> Road Map</p>
-                    <p style={{fontSize:15}}>PDF here</p>
+                    <a style={{fontSize:15, color:'white'}} href="https://drive.google.com/file/d/1w40Q6O0H0CKdxN7tmGmkXgfzTvftbOo4/view?usp=drivesdk">PDF here</a>
                 </div>
             </div>
             </div>
+
+            <div  className="sale h-100">
+                <h4><img style={{width:40}} src={window.location.origin + '/images/haw.png'}></img> Hawk Token</h4>
+            <div style={{marginTop:4, marginBottom: 10}}>
+                <div className='d-flex justify-content-center'>
+                    <p><font style={{color: 'rgb(0, 110, 255)'}}>285</font> / <font style={{fontSize: 12.6}}>285 BNB</font> </p>
+                </div>
+                <ProgressBar striped animated label={100 + '% complete'} className="probar" now={100} /> 
+            </div>
+            <p style={{fontSize:17}}><i className="fas fa-flag-checkered"></i> Price: 0.001 <font style={{color: 'rgb(253, 238, 21)'}}>BNB</font>/HAW</p>
+            <p style={{fontSize:13}}><i className="fas fa-exchange-alt"></i> Max buy amount: 10 <font style={{color: 'rgb(253, 238, 21)'}}>BNB</font></p>
+            <p style={{fontSize:13}}><i className="fas fa-layer-group"></i> Your Bnb Spend: {this.state.userBuyed.toFixed(1)} <font style={{color: 'rgb(0, 110, 255)'}}>BNB</font></p>
+             </div>
             
             <div  className="sale">
                 <h4><i className="fas fa-exchange-alt"></i> Last 8 Transactions</h4>

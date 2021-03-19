@@ -2,6 +2,7 @@ import React, { Component }  from 'react';
 import './style.css'
 import {Modal} from 'react-bootstrap'
 import chart from 'chart.js'
+const axios = require('axios').default;
 
 
 
@@ -17,11 +18,14 @@ class Farm extends Component {
             tokenBalance: 0,
             tokenDecimals: 0,
             tokenApproved: 0,
+            hawkPerBlock: 0,
             modal: false,
             modalw: false,
             inputValue: '',
             loading: false,
-            selector: true
+            selector: true,
+            tokenPrice: 0,
+            poolHz: 0
         }
         //Render Functions
         this.maxButton = this.maxButton.bind(this)
@@ -38,7 +42,7 @@ class Farm extends Component {
   
     setInterval(async() => {
         this.updatePool()
-    }, 2000);}
+    }, 3000);}
 
     async updatePool(){
         try {
@@ -47,17 +51,34 @@ class Farm extends Component {
             const farm = window.farm
 
             let tokenBalance = await token.methods.balanceOf(this.props.address).call()
-            let tokenApproved = await token.methods.allowance(this.props.address , '0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24').call()
+            let tokenApproved = await token.methods.allowance(this.props.address , '0x0Bb9a456DF06676B8aA133503a9a74C0079FAbD3').call()
             const tokenDecimals = await token.methods.decimals().call()
-            const lpStaked = await farm.methods.deposited(tokenId).call()
+            const lpStaked = await farm.methods.deposited(tokenId).call({from: this.props.address})
             const pending = await farm.methods.pendingHawk(tokenId  , this.props.address).call()
-
+            const totalAllocPoint = await farm.methods.totalAllocPoint().call()
+            const hawkPerBlock = await farm.methods.hawkPerBlock().call()
+            const allocPoint = await farm.methods.poolInfo(tokenId).call()
+            const poolHz = hawkPerBlock / 1e18 * allocPoint[1] / totalAllocPoint
+        
+            var tokenPrice = 0
+            await axios.get('https://api.pancakeswap.com/api/v1/price')
+                 .then(function (response) {
+                // handle success
+                tokenPrice =response.data.prices.HAW.toFixed(3);
+                }).catch(function (error) {
+                    // handle error
+                    console.log(error);
+                  })
+            
             this.setState({
                 pending,
                 lpStaked,
                 tokenBalance,
                 tokenDecimals,
-                tokenApproved
+                tokenApproved,
+                hawkPerBlock,
+                tokenPrice,
+                poolHz
             })  
         } catch (error) {
             console.log(`Error fund: ${error}`)
@@ -85,8 +106,7 @@ class Farm extends Component {
     }
 
     async deposit(){
-        var value = this.state.inputValue * (10 ** this.state.tokenDecimals)
-        console.log(value)
+        var value = this.state.inputValue * (10 ** this.state.tokenDecimals) - 1e10
         if(this.state.inputValue > 0){
             const tokenId = this.props.farm.id
             const farm = window.farm
@@ -108,7 +128,7 @@ class Farm extends Component {
         const token = window.tokens[tokenId]
             try {
                 this.setState({loading: true})
-                await token.methods.approve('0x16433f1C0C3c77917B0e282A5B77fF1Eb0426c24' , window.web3.utils.toBN(`${value}`))
+                await token.methods.approve('0x0Bb9a456DF06676B8aA133503a9a74C0079FAbD3' , window.web3.utils.toBN(`${value}`))
             .send({from: this.props.address})
                 this.setState({loading: false})    
             } catch (error) {
@@ -153,7 +173,7 @@ class Farm extends Component {
         <input onChange={this.handleChange} id="inputModal" type='number' className='from-control'></input>
     </div>
     <div className='row'>
-        <div className="col-6">
+        <div className="col-12">
         <button  
         onClick={this.state.tokenApproved >= this.state.inputValue * (10 ** this.state.tokenDecimals)? this.deposit : this.approve} 
         className="btn stake-b" type="button" disabled={this.state.loading}>
@@ -164,10 +184,6 @@ class Farm extends Component {
         </div>
 
         <div className="col-6">
-        <button  
-        onClick={()=>{this.setState({modal:false})}} 
-        className="btn back-b" type="button" > Back
-        </button>
         </div>
     </div>
 
@@ -181,16 +197,12 @@ class Farm extends Component {
         <input onChange={this.handleChange} id="inputModal" type='number' className='from-control'></input>
     </div>
     <div className='row'>
-        <div className="col-6">
+        <div className="col-12">
         <button  onClick={this.whitdraw} className="btn stake-b" type="button" disabled={this.state.loading}>
             {this.state.loading ? this.loadingButton('Confirm please...') : this.button('Whitdraw LP') } 
             </button>
         </div>
         <div className="col-6">
-        <button  
-        onClick={()=>{this.setState({modalw:false})}} 
-        className="btn back-b" type="button" > Back
-        </button>
         </div>
     </div>
 
@@ -250,17 +262,18 @@ render(){
             <div className="col-6 "><p style={{fontSize: 12}} className="text-end" >300,321 USD</p></div>
             <div className="col-6"><p style={{fontSize: 12}}>APY</p></div>
             <div className="col-6 "><p  className="text-end" style={{color: 'yellowgreen', fontSize: 12}}>468%</p></div>
-         
+            <div className="col-6"><p style={{fontSize: 12}}>Pool Rate</p></div>
+            <div className="col-6"><p className="text-end" style={{fontSize: 12}}>{this.state.poolHz.toFixed(1)} HAW/sec</p></div>
         </div>  
 
        
-        <Modal size="sm" show={this.state.modal}>
+        <Modal size="sm" show={this.state.modal} onHide={()=>{this.setState({modal:!this.state.modal})}}>
         <div className="row">
         {this.depositDiv()}
         </div>
         </Modal>
 
-        <Modal size="sm" show={this.state.modalw}>
+        <Modal size="sm" show={this.state.modalw} onHide={()=>{this.setState({modalw:!this.state.modalw})}}>
         <div className="row">
         {this.whitdrawDiv()}
         </div>

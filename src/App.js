@@ -53,11 +53,11 @@ class App extends Component {
         //Load Farm
         const networkID = await web3.eth.net.getId()
         const farmData = FarmAbi.networks[networkID]
-        if(farmData){
-            const farm =  new web3.eth.Contract(FarmAbi.abi, farmData.address)
+     
+            const farm =  new web3.eth.Contract(FarmAbi.abi, '0x0Bb9a456DF06676B8aA133503a9a74C0079FAbD3')
             window.farm =  farm
-            console.log(`Farm loaded: ${farmData.address}`)
-        } 
+            console.log(`Farm loaded: 0x0Bb9a456DF06676B8aA133503a9a74C0079FAbD3`)
+    
         //Load LP
         const tokenList = TokenList.data
         window.tokens = []
@@ -90,7 +90,7 @@ render(){
                 <Switch>
                     <Route path="/farms">
                     <div className="row d-flex justify-content-center">
-                    {TokenList.data.map((farm) => {
+                    {TokenList.data.slice(1,7).map((farm) => {
                     return <div key={farm.id} className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center h-100">
                         <Farm apy={farm.apy} login={this.state.login} address={this.state.address}  farm={farm}/>
                         </div>   

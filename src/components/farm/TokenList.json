@@ -2,10 +2,34 @@
     "data":[
         {
             "id": 0,
-            "img": "/images/bnbhaw.png",
-            "name": "AAA - BNB",
+            "img": "/images/haw.png",
+            "name": "HAWK",
             "earn": "HAW",
-            "lpAddress": "0x4CDea9C6cf2BACcb41325c5B6c829a49aC08E91A",
+            "lpAddress": "0x8301f2213c0eed49a7e28ae4c3e91722919b8b47",
+            "Apy": 400
+        },
+        {
+            "id": 1,
+            "img": "/images/bnbhaw.png",
+            "name": "HAWK - BNB",
+            "earn": "HAW",
+            "lpAddress": "0x2e2946d0b99edc71a3186d1e6f18b89935a3a490",
+            "Apy": 400
+        },
+        {
+            "id": 2,
+            "img": "/images/busdhaw.png",
+            "name": "HAWK - BUSD",
+            "earn": "HAW",
+            "lpAddress": "0xE218a8F0FEC2938CedaA7E3c52b96342E1432625",
+            "Apy": 400
+        },
+        {
+            "id": 3,
+            "img": "/images/adahaw.png",
+            "name": "HAWK - ADA",
+            "earn": "HAW",
+            "lpAddress": "0xF4Cc19ac043bF12f996c5Ae44Bf9a26d78484c5a",
             "Apy": 400
         }
     ]
