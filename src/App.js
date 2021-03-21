@@ -1,14 +1,16 @@
+
+
 import React, { Component }  from 'react';
 import Nav from './components/nav'
 import Farm from './components/farm';
-import Sale from './components/sale'
-import Statics from './components/statics'
+import Sale from './components/sale';
 import './style.css'
 import TokenList from './components/farm/TokenList.json'
 import Web3 from 'web3'
 import FarmAbi from './contracts/MasterChef.json'
 import TokenAbi from  './contracts/HawkToken.json'
 import {BrowserRouter as Router ,Switch , Route} from 'react-router-dom'
+import {Navbar, Container, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 
 
 
@@ -59,7 +61,7 @@ class App extends Component {
             console.log(`Farm loaded: 0x0Bb9a456DF06676B8aA133503a9a74C0079FAbD3`)
     
         //Load LP
-        const tokenList = TokenList.data
+        const tokenList = TokenList.data;
         window.tokens = []
         for (let i = 0; i < tokenList.length; i++) {
             const TokenAddress = tokenList[i].lpAddress
@@ -107,7 +109,18 @@ render(){
             </Router>
         
 
-     
+            <Navbar fixed="bottom" expand="lg" className="navbar-b" variant="dark">
+
+            <Navbar.Toggle  aria-controls="basic-navbar-nav" />
+            
+            <Navbar.Collapse id="basic-navbar-nav">
+            <a href="https://exchange.pancakeswap.finance/#/swap?outputCurrency=0x709792ad37107cd45f79873d7532216c14a36f33" style={{padding: 10}}> <img style={{width:20, alignContent: 'middle'}} src={window.location.origin + '/images/pancakeswap.png'}></img> Buy in PancakeSwap</a>
+            <a href="https://github.com/TechRate/Smart-Contract-Audits/blob/main/Hawk.pdf" style={{padding: 10}}> <i className="fas fa-shield-alt"></i> TechRate Audit</a>
+            <p  style={{padding: 10}}> <i className="fas fa-shield-alt"></i> Hacken Audit (Soon) </p>
+            <a href="https://t.me/HAWKDEFI_MAIN" style={{padding: 10}}> <i className="fab fa-telegram"></i>  Telegram </a>
+            <a href="https://twitter.com/HFi2021?s=09" style={{padding: 10}}> <i className="fab fa-twitter"></i>  Twitter </a>
+            </Navbar.Collapse>
+            </Navbar>
     </div>
   }
 }

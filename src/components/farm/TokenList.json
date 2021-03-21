@@ -6,23 +6,33 @@
             "name": "HAWK",
             "earn": "HAW",
             "lpAddress": "0x8301f2213c0eed49a7e28ae4c3e91722919b8b47",
-            "Apy": 400
-        },
+            "Price": 1
+         },
         {
             "id": 1,
             "img": "/images/bnbhaw.png",
             "name": "HAWK - BNB",
             "earn": "HAW",
             "lpAddress": "0x2e2946d0b99edc71a3186d1e6f18b89935a3a490",
-            "Apy": 400
-        },
+            "Price": 10,
+            "add": "https://exchange.pancakeswap.finance/#/add/BNB/0x709792Ad37107cd45f79873d7532216C14a36F33",
+            "tokens": {
+                "one": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            }
+       
+             },
         {
             "id": 2,
             "img": "/images/busdhaw.png",
             "name": "HAWK - BUSD",
             "earn": "HAW",
             "lpAddress": "0xE218a8F0FEC2938CedaA7E3c52b96342E1432625",
-            "Apy": 400
+            "tokens": {
+                "one": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            },
+            "add": "https://exchange.pancakeswap.finance/#/add/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56/0x709792Ad37107cd45f79873d7532216C14a36F33"
         },
         {
             "id": 3,
@@ -30,8 +40,54 @@
             "name": "HAWK - ADA",
             "earn": "HAW",
             "lpAddress": "0xF4Cc19ac043bF12f996c5Ae44Bf9a26d78484c5a",
-            "Apy": 400
+            "Price": 10,
+            "add": "https://exchange.pancakeswap.finance/#/add/0x3EE2200Efb310fAbB9AacF31297cBdD1d435D47/0x709792Ad37107cd45f79873d7532216C14a36F33",
+            "tokens": {
+                "one": "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            }
+        },
+        {
+            "id": 4,
+            "img": "/images/dusahaw.png",
+            "name": "HAWK - DUSA",
+            "earn": "HAW",
+            "lpAddress": "0x0f51e20b6e5dfb4c868a03566afa0dab79eb25ba",
+            "Price": 704229344,
+            "add": "https://exchange.pancakeswap.finance/#/add/0x376ba3FFAc2643555731349faE9FC8Ca28E2c9A2/0x709792Ad37107cd45f79873d7532216C14a36F33",
+            "tokens": {
+                "one": "0x376ba3ffac2643555731349fae9fc8ca28e2c9a2",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            }
+        },
+        {
+            "id": 5,
+            "img": "/images/btchawk.png",
+            "name": "HAWK - BTC",
+            "earn": "HAW",
+            "lpAddress": "0x1E29FdE363F3c8d8e067378e6c2069319677Fdeb",
+            "Price": 10,
+            "add": "https://exchange.pancakeswap.finance/#/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/0x709792Ad37107cd45f79873d7532216C14a36F33",
+            "tokens": {
+                "one": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            }
+        },
+        {
+            "id": 6,
+            "img": "/images/bakehawk.png",
+            "name": "HAWK - BAKE",
+            "earn": "HAW",
+            "lpAddress": "0xa7E8916Db5Db15892A6185292eebcCF622E42c94",
+            "Price": 10,
+            "add": "https://exchange.pancakeswap.finance/#/add/0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5/0x709792Ad37107cd45f79873d7532216C14a36F33",
+            "tokens": {
+                "one": "0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5",
+                "two": "0x709792ad37107cd45f79873d7532216c14a36f33"
+            }
+            
         }
+        
     ]
     
 }

@@ -1,15 +1,33 @@
 body{
     background-color: #090d28;
     padding-top: 12px;
+    padding-bottom: 40px;
 }
 
-p,h1,h2,h3,h4,h5 {
+p,h1,h2,h3,h4,h5, a {
     color: white;
     margin: 0;
 }
 .btn:hover{
     color: white !important;
 }
+.navbar-toggler-icon, .navbar-toggler {
+    color: white !important;
+}
+.navbar-b{
+    background-color: #121635;
+}
+.dd{
+    
+    padding: 6px;
+    border-radius: 5px;
+   
+    font-size: 10;
+    text-decoration: none;
+    color: white;
+    background-color: #121635;
+}
+
 
 .selector{
     border-width: 0px 0px 3px;
